@@ -14,7 +14,7 @@ class _HomePageViewState extends State<HomePageView> {
     return Scaffold(
       drawer: NavigationDrawerWidget(),
       appBar: AppBar(
-        title: const Text('HomePage', style: TextStyle(color: Colors.white)),
+        title: const Text('Home Page', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue,
         iconTheme: IconThemeData(color: Colors.white),
       ),

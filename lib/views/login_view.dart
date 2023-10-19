@@ -69,7 +69,7 @@ class _LoginViewState extends State<LoginView> {
           return showAlertDialog(
               context, "Login", "Successfully logged in!", homePageRoute);
       }
-    }else{
+    } else {
       Navigator.of(context).pop();
     }
   }
@@ -91,76 +91,113 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Login', style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.blue,
-        ),
-        body: Form(
-          key: _formKey,
-          child: Column(
-            //This is the main container for the login
-            children: <Widget>[
-              const SizedBox(height: 2), //I used SizedBox for spacing
-              TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please type your username';
-                  }
-                  return null;
-                },
-                controller:
-                    _username, //I used the _email from the TextEditingController to manually control the input
-                enableSuggestions: false,
-                autocorrect: false,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter your username',
-                ),
-              ),
-              const SizedBox(height: 2), //I used SizedBox for spacing
-              TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please type your password';
-                  }
-                  return null;
-                },
-                controller:
-                    _password, //I used the _password from the TextEditingController to manually control the input
-                obscureText: _hidePassword,
-                enableSuggestions: false,
-                autocorrect: false,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    hintText: 'Enter your password',
-                    suffixIcon: IconButton(
-                      icon: Icon(_hidePassword
-                          ? Icons.visibility
-                          : Icons
-                              .visibility_off), //If _hidePassword is false, it will show the open-eye icon, if true instead, it will show the closed-eye icon
-                      onPressed: () {
-                        setState(() {
-                          _hidePassword =
-                              !_hidePassword; //To set the _hidePassword variable to change it to change the visibility icon's appearance
-                        });
+        backgroundColor: Colors.blue[400],
+        // appBar: AppBar(
+        //   title: const Text('Login', style: TextStyle(color: Colors.white)),
+        //   backgroundColor: Colors.blue,
+        // ),
+        body: Container(
+          margin: EdgeInsets.only(top:20),
+          width:double.infinity,
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                //This is the main container for the login
+                children: <Widget>[
+                  const SizedBox(height: 40), //I used SizedBox for spacing
+                  Card(
+                    child: Container(
+                      height: 200,
+                      width: 200,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50.50),
+                          image: DecorationImage(
+                              fit: BoxFit.contain,
+                              image: AssetImage('images/DOH_icon.jpg'))),
+                    ),
+                  ),
+                  const Text(
+                    'Mobile DTR',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 10), //I used SizedBox for spacing
+                  SizedBox(
+                    width: 300,
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please type your username';
+                        }
+                        return null;
                       },
-                    )),
+                      controller:
+                          _username, //I used the _email from the TextEditingController to manually control the input
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(),
+                        hintText: 'Enter your username',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10), //I used SizedBox for spacing
+                  SizedBox(
+                    width:300,
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please type your password';
+                        }
+                        return null;
+                      },
+                      controller:
+                          _password, //I used the _password from the TextEditingController to manually control the input
+                      obscureText: _hidePassword,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: const OutlineInputBorder(),
+                          hintText: 'Enter your password',
+                          suffixIcon: IconButton(
+                            icon: Icon(_hidePassword
+                                ? Icons.visibility
+                                : Icons
+                                    .visibility_off), //If _hidePassword is false, it will show the open-eye icon, if true instead, it will show the closed-eye icon
+                            onPressed: () {
+                              setState(() {
+                                _hidePassword =
+                                    !_hidePassword; //To set the _hidePassword variable to change it to change the visibility icon's appearance
+                              });
+                            },
+                          )),
+                    ),
+                  ),
+                  const SizedBox(height: 10), //SizedBox for spacing
+                  OutlinedButton(
+                    style: ElevatedButton.styleFrom(
+                        side: const BorderSide(color: Colors.transparent),
+                        shadowColor: Colors.black,
+                        backgroundColor: Colors.blue[500],
+                        padding: const EdgeInsets.symmetric(horizontal: 60.0)),
+                    onPressed: () => logIn(),
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )
+                ],
               ),
-              const SizedBox(height: 2), //SizedBox for spacing
-              OutlinedButton(
-                style: ElevatedButton.styleFrom(
-                    side: const BorderSide(color: Colors.transparent),
-                    backgroundColor: Colors.blue,
-                    padding: const EdgeInsets.symmetric(horizontal: 60.0)),
-                onPressed: () => logIn(),
-                child: const Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white),
-                ),
-              )
-            ],
+            ),
           ),
         ));
   }
