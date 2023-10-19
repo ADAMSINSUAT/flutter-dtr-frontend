@@ -63,6 +63,7 @@ showAlertDialog(
 
   showDialog(
       context: context,
+      barrierDismissible:  false,
       builder: (BuildContext context) {
         if (title == "Login") {
           Future.delayed(Duration(seconds: count), () {
